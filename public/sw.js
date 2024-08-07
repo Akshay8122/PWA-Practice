@@ -1,8 +1,8 @@
 importScripts("/src/js/idb.js");
 importScripts("/src/js/utility.js");
 
-var CACHE_STATIC_NAME = "static-v29";
-var CACHE_DYNAMIC_NAME = "dynamic-v2";
+var CACHE_STATIC_NAME = "static-v30";
+var CACHE_DYNAMIC_NAME = "dynamic-v3";
 var STATIC_FILES = [
   "/",
   "/index.html",
@@ -196,7 +196,7 @@ self.addEventListener("sync", function (event) {
                 title: dt.title,
                 location: dt.location,
                 image:
-                  "https://firebasestorage.googleapis.com/v0/b/pwagram-b89fc.appspot.com/o/sf-boat.jpg?alt=media&token=761b93ab-7777-4fe5-8c9a-3806f46cd2e4",
+                  "https://firebasestorage.googleapis.com/v0/b/pwagram-b89fc.appspot.com/o/sf-boat.jpg?alt=media&token=b8e0516a-81c8-408b-bd95-bf4ba367e308",
               }),
             }
           )

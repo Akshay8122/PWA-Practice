@@ -12,6 +12,7 @@ var canvasElement = document.querySelector("#canvas");
 var captureButton = document.querySelector("#capture-btn");
 var imagePicker = document.querySelector("#image-picker");
 var imagePickerArea = document.querySelector("#pick-image");
+var picture;
 
 function initializeMedia() {
   if (!("mediaDevices" in navigator)) {
@@ -56,6 +57,7 @@ captureButton.addEventListener("click", function (event) {
   videoPlayer.srcObject.getVideoTracks().forEach(function (track) {
     track.stop();
   });
+  picture = dataURItoBlob(canvasElement.toDataURL());
 });
 
 function openCreatePostModal() {
@@ -193,7 +195,7 @@ function sendData() {
         title: titleInput.value,
         location: locationInput.value,
         image:
-          "https://firebasestorage.googleapis.com/v0/b/pwagram-b89fc.appspot.com/o/sf-boat.jpg?alt=media&token=761b93ab-7777-4fe5-8c9a-3806f46cd2e4",
+          "https://firebasestorage.googleapis.com/v0/b/pwagram-b89fc.appspot.com/o/sf-boat.jpg?alt=media&token=b8e0516a-81c8-408b-bd95-bf4ba367e308",
       }),
     }
   ).then(function (res) {
@@ -218,7 +220,9 @@ form.addEventListener("submit", function (event) {
         id: new Date().toISOString(),
         title: titleInput.value,
         location: locationInput.value,
+        picture: picture,
       };
+      writeData("sync-posts", post);
       writeData("sync-posts", post)
         .then(function () {
           return sw.sync.register("sync-new-posts");
