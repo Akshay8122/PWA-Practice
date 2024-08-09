@@ -1,19 +1,24 @@
-var functions = require("firebase-functions");
-var admin = require("firebase-admin");
+import { https } from "firebase-functions";
+
+import {
+  initializeApp,
+  credential as _credential,
+  database,
+} from "firebase-admin";
 var cors = require("cors")({ origin: true });
-var webpush = require("web-push");
-var formidable = require("formidable");
-var fs = require("fs");
-var UUID = require("uuid-v4");
-var os = require("os");
-var Busboy = require("busboy");
-var path = require("path");
+import { setVapidDetails, sendNotification } from "web-push";
+import formidable from "formidable";
+import { createWriteStream } from "fs";
+import { v4 as uuidv4 } from "uuid";
+import { tmpdir } from "os";
+import Busboy from "busboy";
+import { join } from "path";
 
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 //
 
-var serviceAccount = require("./pwagram-fb-key.json");
+import serviceAccount from "./pwagram-fb-key.json";
 
 var gcconfig = {
   projectId: "pwagram-b89fc",
@@ -22,14 +27,14 @@ var gcconfig = {
 
 var gcs = require("@google-cloud/storage")(gcconfig);
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+initializeApp({
+  credential: _credential.cert(serviceAccount),
   databaseURL: "https://pwagram-b89fc-default-rtdb.firebaseio.com/",
 });
 
-exports.storePostData = functions.https.onRequest(function (request, response) {
+export const storePostData = https.onRequest(function (request, response) {
   cors(request, response, function () {
-    var uuid = UUID();
+    var uuid = uuidv4();
 
     const busboy = new Busboy({ headers: request.headers });
     // These objects will store the values (file + fields) extracted from busboy
@@ -41,9 +46,9 @@ exports.storePostData = functions.https.onRequest(function (request, response) {
       console.log(
         `File [${fieldname}] filename: ${filename}, encoding: ${encoding}, mimetype: ${mimetype}`
       );
-      const filepath = path.join(os.tmpdir(), filename);
+      const filepath = join(tmpdir(), filename);
       upload = { file: filepath, type: mimetype };
-      file.pipe(fs.createWriteStream(filepath));
+      file.pipe(createWriteStream(filepath));
     });
 
     // This will invoked on every field detected
@@ -77,8 +82,7 @@ exports.storePostData = functions.https.onRequest(function (request, response) {
         },
         function (err, uploadedFile) {
           if (!err) {
-            admin
-              .database()
+            database()
               .ref("posts")
               .push({
                 id: fields.id,
@@ -93,12 +97,12 @@ exports.storePostData = functions.https.onRequest(function (request, response) {
                   uuid,
               })
               .then(function () {
-                webpush.setVapidDetails(
+                setVapidDetails(
                   "mailto:business@academind.com",
                   "BP6KzieHU7e99VsKeKTY8-3La3Q7apU3Gr-Kvc4WfYaUWi-FVTPQf4FBZXbwhA7966zH9YJAYEBntUhWeZ9BkH0",
                   "5HSnw0DfCwxNGnp3BltLbiD9DXDBXc1NXiVPZzeTkGY"
                 );
-                return admin.database().ref("subscriptions").once("value");
+                return database().ref("subscriptions").once("value");
               })
               .then(function (subscriptions) {
                 subscriptions.forEach(function (sub) {
@@ -110,18 +114,16 @@ exports.storePostData = functions.https.onRequest(function (request, response) {
                     },
                   };
 
-                  webpush
-                    .sendNotification(
-                      pushConfig,
-                      JSON.stringify({
-                        title: "New Post",
-                        content: "New Post added!",
-                        openUrl: "/help",
-                      })
-                    )
-                    .catch(function (err) {
-                      console.log(err);
-                    });
+                  sendNotification(
+                    pushConfig,
+                    JSON.stringify({
+                      title: "New Post",
+                      content: "New Post added!",
+                      openUrl: "/help",
+                    })
+                  ).catch(function (err) {
+                    console.log(err);
+                  });
                 });
                 response
                   .status(201)

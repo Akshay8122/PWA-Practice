@@ -17,9 +17,11 @@
     "busboy": "^1.6.0",
     "firebase-admin": "^12.1.0",
     "firebase-functions": "^5.0.0",
-    "uuid-v4": "^0.1.0"
+    "uuid-v4": "^0.1.0",
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
+    "@types/busboy": "^1.5.4",
     "firebase-functions-test": "^3.1.0"
   },
   "private": true

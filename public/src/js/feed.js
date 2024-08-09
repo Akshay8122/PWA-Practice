@@ -60,6 +60,10 @@ captureButton.addEventListener("click", function (event) {
   picture = dataURItoBlob(canvasElement.toDataURL());
 });
 
+imagePicker.addEventListener("change", function (event) {
+  picture = event.target.files[0];
+});
+
 function openCreatePostModal() {
   // createPostArea.style.display = 'block';
   // setTimeout(function() {
