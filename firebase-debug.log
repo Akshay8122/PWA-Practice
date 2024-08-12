@@ -431,3 +431,75 @@ You're about to initialize a Firebase project in this directory:
     at process.processTimers (node:internal/timers:512:7)
 [error] 
 [error] Error: An unexpected error has occurred.
+[debug] [2024-08-09T15:53:12.451Z] ----------------------------------------------------------------------
+[debug] [2024-08-09T15:53:12.452Z] Command:       /usr/bin/node /usr/bin/firebase deploy
+[debug] [2024-08-09T15:53:12.453Z] CLI Version:   13.15.0
+[debug] [2024-08-09T15:53:12.453Z] Platform:      linux
+[debug] [2024-08-09T15:53:12.453Z] Node Version:  v18.17.1
+[debug] [2024-08-09T15:53:12.453Z] Time:          Fri Aug 09 2024 21:23:12 GMT+0530 (India Standard Time)
+[debug] [2024-08-09T15:53:12.453Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-08-09T15:53:12.506Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-08-09T15:53:12.506Z] > authorizing via signed-in user (patelakshay43751@gmail.com)
+[debug] [2024-08-09T15:53:12.506Z] [iam] checking project pwagram-b89fc for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2024-08-09T15:53:12.507Z] > refreshing access token with scopes: []
+[debug] [2024-08-09T15:53:12.508Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-08-09T15:53:12.508Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-08-09T15:53:17.979Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2024-08-09T15:53:17.979Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-08-09T15:53:17.993Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/pwagram-b89fc:testIamPermissions [none]
+[debug] [2024-08-09T15:53:17.993Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/pwagram-b89fc:testIamPermissions x-goog-quota-user=projects/pwagram-b89fc
+[debug] [2024-08-09T15:53:17.993Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/pwagram-b89fc:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-08-09T15:53:24.726Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/pwagram-b89fc:testIamPermissions 200
+[debug] [2024-08-09T15:53:24.726Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/pwagram-b89fc:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-08-09T15:53:24.728Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/pwagram-b89fc/serviceAccounts/pwagram-b89fc@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2024-08-09T15:53:24.728Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/pwagram-b89fc/serviceAccounts/pwagram-b89fc@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2024-08-09T15:53:31.913Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/pwagram-b89fc/serviceAccounts/pwagram-b89fc@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2024-08-09T15:53:31.913Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/pwagram-b89fc/serviceAccounts/pwagram-b89fc@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2024-08-09T15:53:31.916Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/pwagram-b89fc [none]
+[debug] [2024-08-09T15:53:37.623Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/pwagram-b89fc 200
+[debug] [2024-08-09T15:53:37.624Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/pwagram-b89fc {"projectId":"pwagram-b89fc","projectNumber":"939483780205","displayName":"pwagram","name":"projects/pwagram-b89fc","resources":{"hostingSite":"pwagram-b89fc","realtimeDatabaseInstance":"pwagram-b89fc-default-rtdb","storageBucket":"pwagram-b89fc.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_3d6a929b-6af5-4667-bc29-a55f5544bdfe"}
+[info] 
+[info] === Deploying to 'pwagram-b89fc'...
+[info] 
+[info] i  deploying functions, hosting 
+[debug] [2024-08-09T15:53:37.629Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/pwagram-b89fc [none]
+[debug] [2024-08-09T15:53:43.459Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/pwagram-b89fc 200
+[debug] [2024-08-09T15:53:43.460Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/pwagram-b89fc {"projectId":"pwagram-b89fc","projectNumber":"939483780205","displayName":"pwagram","name":"projects/pwagram-b89fc","resources":{"hostingSite":"pwagram-b89fc","realtimeDatabaseInstance":"pwagram-b89fc-default-rtdb","storageBucket":"pwagram-b89fc.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_3d6a929b-6af5-4667-bc29-a55f5544bdfe"}
+[info] i  functions: preparing codebase default for deployment 
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[debug] [2024-08-09T15:53:43.463Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/pwagram-b89fc/services/cloudfunctions.googleapis.com [none]
+[debug] [2024-08-09T15:53:43.464Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/pwagram-b89fc/services/cloudfunctions.googleapis.com x-goog-quota-user=projects/pwagram-b89fc
+[debug] [2024-08-09T15:53:43.466Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/pwagram-b89fc/services/runtimeconfig.googleapis.com [none]
+[debug] [2024-08-09T15:53:43.466Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/pwagram-b89fc/services/runtimeconfig.googleapis.com x-goog-quota-user=projects/pwagram-b89fc
+[debug] [2024-08-09T15:53:43.468Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/pwagram-b89fc/services/cloudbuild.googleapis.com [none]
+[debug] [2024-08-09T15:53:43.469Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/pwagram-b89fc/services/cloudbuild.googleapis.com x-goog-quota-user=projects/pwagram-b89fc
+[debug] [2024-08-09T15:53:43.471Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/pwagram-b89fc/services/artifactregistry.googleapis.com [none]
+[debug] [2024-08-09T15:53:43.471Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/pwagram-b89fc/services/artifactregistry.googleapis.com x-goog-quota-user=projects/pwagram-b89fc
+[debug] [2024-08-09T15:53:50.629Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/pwagram-b89fc/services/runtimeconfig.googleapis.com 200
+[debug] [2024-08-09T15:53:50.629Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/pwagram-b89fc/services/runtimeconfig.googleapis.com [omitted]
+[debug] [2024-08-09T15:53:50.631Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/pwagram-b89fc/services/cloudfunctions.googleapis.com 200
+[debug] [2024-08-09T15:53:50.631Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/pwagram-b89fc/services/cloudfunctions.googleapis.com [omitted]
+[info] ✔  functions: required API cloudfunctions.googleapis.com is enabled 
+[debug] [2024-08-09T15:53:55.643Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/pwagram-b89fc/services/cloudbuild.googleapis.com 200
+[debug] [2024-08-09T15:53:55.644Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/pwagram-b89fc/services/cloudbuild.googleapis.com [omitted]
+[warn] ⚠  functions: missing required API cloudbuild.googleapis.com. Enabling now... 
+[debug] [2024-08-09T15:53:55.645Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/pwagram-b89fc/services/cloudbuild.googleapis.com:enable [none]
+[debug] [2024-08-09T15:53:55.646Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/pwagram-b89fc/services/cloudbuild.googleapis.com:enable x-goog-quota-user=projects/pwagram-b89fc
+[debug] [2024-08-09T15:53:55.705Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/pwagram-b89fc/services/artifactregistry.googleapis.com 200
+[debug] [2024-08-09T15:53:55.707Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/pwagram-b89fc/services/artifactregistry.googleapis.com [omitted]
+[warn] ⚠  artifactregistry: missing required API artifactregistry.googleapis.com. Enabling now... 
+[debug] [2024-08-09T15:53:55.708Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/pwagram-b89fc/services/artifactregistry.googleapis.com:enable [none]
+[debug] [2024-08-09T15:53:55.708Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/pwagram-b89fc/services/artifactregistry.googleapis.com:enable x-goog-quota-user=projects/pwagram-b89fc
+[debug] [2024-08-09T15:54:02.709Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/pwagram-b89fc/services/cloudbuild.googleapis.com:enable 400
+[debug] [2024-08-09T15:54:02.709Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/pwagram-b89fc/services/cloudbuild.googleapis.com:enable [omitted]
+[debug] [2024-08-09T15:54:02.723Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/pwagram-b89fc/services/artifactregistry.googleapis.com:enable 400
+[debug] [2024-08-09T15:54:02.723Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/pwagram-b89fc/services/artifactregistry.googleapis.com:enable [omitted]
+[debug] [2024-08-09T15:54:07.720Z] Error: Timed out.
+    at Timeout._onTimeout (/usr/lib/node_modules/firebase-tools/lib/utils.js:268:49)
+    at listOnTimeout (node:internal/timers:569:17)
+    at process.processTimers (node:internal/timers:512:7)
+[error] 
+[error] Error: An unexpected error has occurred.

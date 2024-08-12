@@ -13,6 +13,47 @@ var captureButton = document.querySelector("#capture-btn");
 var imagePicker = document.querySelector("#image-picker");
 var imagePickerArea = document.querySelector("#pick-image");
 var picture;
+var locationBtn = document.querySelector("#location-btn");
+var locationLoader = document.querySelector("#location-loader");
+var fetchedLocation = { lat: 0, lng: 0 };
+
+locationBtn.addEventListener("click", function (event) {
+  if (!("geolocation" in navigator)) {
+    return;
+  }
+  var sawAlert = false;
+
+  locationBtn.style.display = "none";
+  locationLoader.style.display = "block";
+
+  navigator.geolocation.getCurrentPosition(
+    function (position) {
+      locationBtn.style.display = "inline";
+      locationLoader.style.display = "none";
+      fetchedLocation = { lat: position.coords.latitude, lng: 0 };
+      locationInput.value = "In Mubai";
+      document.querySelector("#manual-location").classList.add("is-focused");
+    },
+    function (err) {
+      console.log(err);
+      locationBtn.style.display = "inline";
+      locationLoader.style.display = "none";
+      if (!sawAlert) {
+        alert("Couldn't fetch location, please enter manually!");
+        sawAlert = true;
+      }
+      fetchedLocation = { lat: 0, lng: 0 };
+    },
+    { timeout: 7000 }
+  );
+});
+console.log("🚀 ~ fetchedLocation:", fetchedLocation);
+
+function initializeLocation() {
+  if (!("geolocation" in navigator)) {
+    locationBtn.style.display = "none";
+  }
+}
 
 function initializeMedia() {
   if (!("mediaDevices" in navigator)) {
@@ -21,10 +62,13 @@ function initializeMedia() {
 
   if (!("getUserMedia" in navigator.mediaDevices)) {
     navigator.mediaDevices.getUserMedia = function (constraints) {
-      var userMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+      var getUserMedia =
+        navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
       if (!getUserMedia) {
-        return Promise.reject(new Error("getUserMedia is not implemented"));
+        return Promise.reject(new Error("getUserMedia is not implemented!"));
       }
+
       return new Promise(function (resolve, reject) {
         getUserMedia.call(navigator, constraints, resolve, reject);
       });
@@ -69,6 +113,7 @@ function openCreatePostModal() {
   // setTimeout(function() {
   createPostArea.style.transform = "translateY(0)";
   initializeMedia();
+  initializeLocation();
   // }, 1);
   if (deferredPrompt) {
     deferredPrompt.prompt();
@@ -97,11 +142,20 @@ function openCreatePostModal() {
 }
 
 function closeCreatePostModal() {
-  createPostArea.style.transform = "translateY(100vh)";
   imagePickerArea.style.display = "none";
   videoPlayer.style.display = "none";
   canvasElement.style.display = "none";
-  // createPostArea.style.display = 'none';
+  locationBtn.style.display = "inline";
+  locationLoader.style.display = "none";
+  captureButton.style.display = "inline";
+  if (videoPlayer.srcObject) {
+    videoPlayer.srcObject.getVideoTracks().forEach(function (track) {
+      track.stop();
+    });
+  }
+  setTimeout(() => {
+    createPostArea.style.transform = "translateY(100vh)";
+  }, 1);
 }
 
 shareImageButton.addEventListener("click", openCreatePostModal);
@@ -186,20 +240,27 @@ if ("indexedDB" in window) {
 }
 
 function sendData() {
+  // var id = new Date().toISOString();
+  // var postData = new FormData();
+  // postData.append("id", id);
+  // postData.append("title", titleInput.value);
+  // postData.append("location", locationInput.value);
+  // postData.append("rawLocationLat", fetchedLocation.lat);
+  // postData.append("rawLocationLng", fetchedLocation.lng);
+  // postData.append("file", picture, id + ".png");
+
   fetch(
     "https://pwagram-b89fc-default-rtdb.firebaseio.com/pwagram/posts.json",
     {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
       body: JSON.stringify({
         id: new Date().toISOString(),
         title: titleInput.value,
         location: locationInput.value,
         image:
           "https://firebasestorage.googleapis.com/v0/b/pwagram-b89fc.appspot.com/o/sf-boat.jpg?alt=media&token=b8e0516a-81c8-408b-bd95-bf4ba367e308",
+        rawLocationLat: fetchedLocation.lat,
+        rawLocationLng: fetchedLocation.lng,
       }),
     }
   ).then(function (res) {
@@ -225,8 +286,8 @@ form.addEventListener("submit", function (event) {
         title: titleInput.value,
         location: locationInput.value,
         picture: picture,
+        rawLocation: fetchedLocation,
       };
-      writeData("sync-posts", post);
       writeData("sync-posts", post)
         .then(function () {
           return sw.sync.register("sync-new-posts");

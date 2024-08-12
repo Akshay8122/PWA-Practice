@@ -1,5 +1,4 @@
 import { https } from "firebase-functions";
-
 import {
   initializeApp,
   credential as _credential,
@@ -7,9 +6,10 @@ import {
 } from "firebase-admin";
 var cors = require("cors")({ origin: true });
 import { setVapidDetails, sendNotification } from "web-push";
-import formidable from "formidable";
 import { createWriteStream } from "fs";
 import { v4 as uuidv4 } from "uuid";
+import { Storage } from "@google-cloud/storage";
+
 import { tmpdir } from "os";
 import Busboy from "busboy";
 import { join } from "path";
@@ -25,7 +25,7 @@ var gcconfig = {
   keyFilename: "pwagram-fb-key.json",
 };
 
-var gcs = require("@google-cloud/storage")(gcconfig);
+var gcs = new Storage(gcconfig);
 
 initializeApp({
   credential: _credential.cert(serviceAccount),
@@ -85,9 +85,12 @@ export const storePostData = https.onRequest(function (request, response) {
             database()
               .ref("posts")
               .push({
-                id: fields.id,
                 title: fields.title,
                 location: fields.location,
+                rawLocation: {
+                  lat: fields.rawLocationLat,
+                  lng: fields.rawLocationLng,
+                },
                 image:
                   "https://firebasestorage.googleapis.com/v0/b/" +
                   bucket.name +
