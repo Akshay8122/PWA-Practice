@@ -47,7 +47,6 @@ locationBtn.addEventListener("click", function (event) {
     { timeout: 7000 }
   );
 });
-console.log("🚀 ~ fetchedLocation:", fetchedLocation);
 
 function initializeLocation() {
   if (!("geolocation" in navigator)) {
