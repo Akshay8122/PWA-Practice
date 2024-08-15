@@ -1,4 +1,6 @@
 importScripts("workbox-sw.prod.v2.1.3.js");
+importScripts("/src/js/idb.js");
+importScripts("/src/js/utility.js");
 
 const workboxSW = new self.WorkboxSW();
 
@@ -6,6 +8,10 @@ workboxSW.router.registerRoute(
   /.*(?:googleapis|gstatic)\.com.*$/,
   workboxSW.strategies.staleWhileRevalidate({
     cacheName: "google-fonts",
+    cacheExpiration: {
+      maxEntries: 3,
+      maxAgeSeconds: 60 * 60 * 24 * 30,
+    },
   })
 );
 
@@ -21,6 +27,24 @@ workboxSW.router.registerRoute(
   workboxSW.strategies.staleWhileRevalidate({
     cacheName: "post-images",
   })
+);
+
+workboxSW.router.registerRoute(
+  "https://pwagram-b89fc-default-rtdb.firebaseio.com/pwagram/posts.json",
+  async function (args) {
+    const res = await fetch(args.event.request);
+    var clonedRes = res.clone();
+    clearAllData("posts")
+      .then(function () {
+        return clonedRes.json();
+      })
+      .then(function (data) {
+        for (var key in data) {
+          writeData("posts", data[key]);
+        }
+      });
+    return res;
+  }
 );
 
 workboxSW.precache([
@@ -46,7 +70,7 @@ workboxSW.precache([
   },
   {
     "url": "service-worker.js",
-    "revision": "e38db778a7b520f1eed9a0fea92bd630"
+    "revision": "d12326bd7169745b3797bd7d3a07e1c0"
   },
   {
     "url": "src/css/app.css",
@@ -90,11 +114,11 @@ workboxSW.precache([
   },
   {
     "url": "sw-base.js",
-    "revision": "d7695722d7550c070cdf07f506f5ed0a"
+    "revision": "808cd73da6901da5e5526b6d091ba171"
   },
   {
     "url": "sw.js",
-    "revision": "aed5b877939f1bf16017d0c5a59f53ea"
+    "revision": "da619b3e75f091436e74fd2ef712faf0"
   },
   {
     "url": "workbox-sw.prod.v2.1.3.js",

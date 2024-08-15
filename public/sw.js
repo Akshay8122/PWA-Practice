@@ -74,7 +74,8 @@ function isInArray(string, array) {
 }
 
 self.addEventListener("fetch", function (event) {
-  var url = "https://pwagram-b89fc-default-rtdb.firebaseio.com/pwagram/posts";
+  var url =
+    "https://pwagram-b89fc-default-rtdb.firebaseio.com/pwagram/posts.json";
   if (event.request.url.indexOf(url) > -1) {
     event.respondWith(
       fetch(event.request).then(function (res) {
