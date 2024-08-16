@@ -79,8 +79,6 @@ self.addEventListener("sync", function (event) {
     event.waitUntil(
       readAllData("sync-posts").then(function (data) {
         for (var dt of data) {
-          console.log(dt, "dt>>>");
-
           fetch(
             "https://pwagram-b89fc-default-rtdb.firebaseio.com/pwagram/posts.json",
             {

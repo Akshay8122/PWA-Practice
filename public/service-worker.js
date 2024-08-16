@@ -72,16 +72,12 @@ workboxSW.router.registerRoute(
 
 workboxSW.precache([
   {
-    "url": "404.html",
-    "revision": "0a27a4163254fc8fce870c8cc3a3f94f"
-  },
-  {
     "url": "favicon.ico",
     "revision": "2cab47d9e04d664d93c8d91aec59e812"
   },
   {
     "url": "index.html",
-    "revision": "dcdb38d559204791192b062819eaab75"
+    "revision": "dd1e54cc5f6590c60b20e5e4ff8beb28"
   },
   {
     "url": "manifest.json",
@@ -90,10 +86,6 @@ workboxSW.precache([
   {
     "url": "offline.html",
     "revision": "45352e71a80a5c75d25e226e7330871b"
-  },
-  {
-    "url": "service-worker.js",
-    "revision": "2e8f52b21827ec696c62e8fd9a5f178d"
   },
   {
     "url": "src/css/app.css",
@@ -106,46 +98,6 @@ workboxSW.precache([
   {
     "url": "src/css/help.css",
     "revision": "1c6d81b27c9d423bece9869b07a7bd73"
-  },
-  {
-    "url": "src/js/app.js",
-    "revision": "2ebb6440c251cc8da441022ac20e59c1"
-  },
-  {
-    "url": "src/js/feed.js",
-    "revision": "7e2d7464afe9957afb2ddbfba2115aec"
-  },
-  {
-    "url": "src/js/fetch.js",
-    "revision": "6b82fbb55ae19be4935964ae8c338e92"
-  },
-  {
-    "url": "src/js/idb.js",
-    "revision": "017ced36d82bea1e08b08393361e354d"
-  },
-  {
-    "url": "src/js/material.min.js",
-    "revision": "713af0c6ce93dbbce2f00bf0a98d0541"
-  },
-  {
-    "url": "src/js/promise.js",
-    "revision": "10c2238dcd105eb23f703ee53067417f"
-  },
-  {
-    "url": "src/js/utility.js",
-    "revision": "fb86976be5ae0b61118617f07d5b07f6"
-  },
-  {
-    "url": "sw-base.js",
-    "revision": "46b4c61643c67c670bdaa5462a405112"
-  },
-  {
-    "url": "sw.js",
-    "revision": "da619b3e75f091436e74fd2ef712faf0"
-  },
-  {
-    "url": "workbox-sw.prod.v2.1.3.js",
-    "revision": "a9890beda9e5f17e4c68f42324217941"
   },
   {
     "url": "src/images/main-image-lg.jpg",
@@ -162,6 +114,34 @@ workboxSW.precache([
   {
     "url": "src/images/sf-boat.jpg",
     "revision": "0f282d64b0fb306daf12050e812d6a19"
+  },
+  {
+    "url": "src/js/app.min.js",
+    "revision": "757fd6f5708b093ccb56b604036bf880"
+  },
+  {
+    "url": "src/js/feed.min.js",
+    "revision": "be11bb1207975b15bb95e938a7010950"
+  },
+  {
+    "url": "src/js/fetch.min.js",
+    "revision": "f258cf8e71371bd6f158a7fffe7df405"
+  },
+  {
+    "url": "src/js/idb.min.js",
+    "revision": "d8dd6e8a931d2a556beeaae3bb16c985"
+  },
+  {
+    "url": "src/js/material.min.js",
+    "revision": "713af0c6ce93dbbce2f00bf0a98d0541"
+  },
+  {
+    "url": "src/js/promise.min.js",
+    "revision": "f874d37f9e9202ba09b3f2e4995c4827"
+  },
+  {
+    "url": "src/js/utility.min.js",
+    "revision": "109b2f15f904fdc6f47081e064afb458"
   }
 ]);
 
