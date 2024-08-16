@@ -1,7 +1,3 @@
-# Project Title
-
-A brief description of what this project does and who it's for
-
 # PWA
 
 PWA is a Progressive Web Application (PWA) built with React, designed to deliver a fast, reliable, and engaging user experience. This project implements various advanced PWA features, including service workers, advanced caching strategies, IndexedDB, background sync, web push notifications, and access to native device features like camera and file uploads.
