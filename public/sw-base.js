@@ -63,8 +63,9 @@ workboxSW.router.registerRoute(
           return res;
         })
         .catch(async function (err) {
-          const res_1 = await caches.match("/offline.html");
-          return res_1;
+          return caches.match("/offline.html").then(function (res) {
+            return res;
+          });
         });
     }
   }

@@ -63,8 +63,9 @@ workboxSW.router.registerRoute(
           return res;
         })
         .catch(async function (err) {
-          const res_1 = await caches.match("/offline.html");
-          return res_1;
+          return caches.match("/offline.html").then(function (res) {
+            return res;
+          });
         });
     }
   }
@@ -77,19 +78,19 @@ workboxSW.precache([
   },
   {
     "url": "index.html",
-    "revision": "dd1e54cc5f6590c60b20e5e4ff8beb28"
+    "revision": "8ebb2233d3e55c868182169ecf2c7f34"
   },
   {
     "url": "manifest.json",
-    "revision": "d11c7965f5cfba711c8e74afa6c703d7"
+    "revision": "d6019e16cbf9619ad32002318ab00cee"
   },
   {
     "url": "offline.html",
-    "revision": "45352e71a80a5c75d25e226e7330871b"
+    "revision": "6f0edb22ced73422759acf3eb4c37a60"
   },
   {
     "url": "src/css/app.css",
-    "revision": "59d917c544c1928dd9a9e1099b0abd71"
+    "revision": "62c2d65d9ab6e45f0be89c0c909b2f04"
   },
   {
     "url": "src/css/feed.css",
@@ -97,7 +98,7 @@ workboxSW.precache([
   },
   {
     "url": "src/css/help.css",
-    "revision": "1c6d81b27c9d423bece9869b07a7bd73"
+    "revision": "362674d936ae40f9b17e93a22191faf7"
   },
   {
     "url": "src/images/main-image-lg.jpg",
@@ -110,6 +111,18 @@ workboxSW.precache([
   {
     "url": "src/images/main-image.jpg",
     "revision": "5c66d091b0dc200e8e89e56c589821fb"
+  },
+  {
+    "url": "src/images/pwa-lg.webp",
+    "revision": "a05bc70713e09d3a8a8ce12c9aa6610d"
+  },
+  {
+    "url": "src/images/pwa-md.webp",
+    "revision": "c87ae2257f8e6ed40513ace87f5c4a9f"
+  },
+  {
+    "url": "src/images/pwa-sm.webp",
+    "revision": "1fed4c7175ef9117192107fa10859903"
   },
   {
     "url": "src/images/sf-boat.jpg",
@@ -152,8 +165,6 @@ self.addEventListener("sync", function (event) {
     event.waitUntil(
       readAllData("sync-posts").then(function (data) {
         for (var dt of data) {
-          console.log(dt, "dt>>>");
-
           fetch(
             "https://pwagram-b89fc-default-rtdb.firebaseio.com/pwagram/posts.json",
             {

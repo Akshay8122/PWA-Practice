@@ -17,7 +17,7 @@
     "complete",
     "tutorial"
   ],
-  "author": "Maximilian Schwarzmüller",
+  "author": "Akshay Patel",
   "license": "ISC",
   "devDependencies": {
     "http-server": "^0.10.0",

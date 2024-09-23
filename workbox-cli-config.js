@@ -2,7 +2,7 @@ module.exports = {
   globDirectory: "public/",
   globPatterns: [
     "**/*.{html,ico,json,css}",
-    "src/images/*.{jpg,png}",
+    "src/images/*.{jpg,png,webp}",
     "src/js/*.min.js",
   ],
   swSrc: "public/sw-base.js",

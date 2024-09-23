@@ -9,3 +9,9 @@
 .enable-notifications {
   display: none;
 }
+
+.mdl-layout__header,
+.mdl-button--raised.mdl-button--colored {
+  background-color: #0369a1;
+  /* rgb(66 67 74); */
+}
